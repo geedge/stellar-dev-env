@@ -18,8 +18,10 @@ Replace `your_username`  and  `your_passwd` with your private account.
 Step 2: Pull the stellar-dev-env Docker image, use the following command:
 
 ```
-docker pull git.mesalab.cn:7443/stellar/stellar-dev-env:main
+docker pull git.mesalab.cn:7443/stellar/stellar-dev-env:$tag
 ```
+
+Replace `tag` with the desired version or branch name, such as `main`.
 
 After successfully pulling the image, you can use the stellar-dev-env Docker container as needed.
 
@@ -37,4 +39,4 @@ The stellar-dev-env Docker image comes pre-installed with essential development 
 * libfieldstat3
 * libfieldstat4
 * libbreakpad_mini
-* licjson
+* libcjson

@@ -20,6 +20,8 @@ RUN cp /tmp/repo.internal.geedge.net.repo /etc/yum.repos.d/ && \
     yum install -y libunwind gperftools && \
     dnf --enablerepo=powertools install -y libnsl 
 
+RUN yum makecache
+
 RUN yumdownloader --destdir=/tmp/ libMESA_prof_load-devel libMESA_prof_load \
                             libMESA_htable-devel libMESA_htable \
                             libMESA_handle_logger-devel libMESA_handle_logger \ 
@@ -28,11 +30,12 @@ RUN yumdownloader --destdir=/tmp/ libMESA_prof_load-devel libMESA_prof_load \
                             libbreakpad_mini libMESA_jump_layer libcjson && \
     find /tmp/ -name "*.rpm" |xargs rpm --prefix=/opt/tsg/framework --force --nodeps -ivh
 
-RUN yumdownloader --destdir=/tmp/ sapp stellar-c && \
+RUN yumdownloader --destdir=/tmp/ sapp-4.3.38.90209da stellar-c-1.0.13.57d25a1 && \
     find /tmp/ -name "sapp*.rpm" |xargs rpm --prefix=/opt/tsg/sapp -ivh && \
     find /tmp/ -name "stellar-c*.rpm" | xargs rpm --prefix=/opt/tsg/  -ivh
     
 RUN yum clean all && \
+    rm /tmp/*.rpm && \
     rm -rf /var/cache/yum
 
 CMD [ "/bin/bash" ]
